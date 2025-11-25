@@ -1,0 +1,12 @@
+# Ignore Data (Privacy)
+data/
+*.csv
+
+# Ignore Artifacts (Generated files)
+*.joblib
+*.json
+
+# Ignore System Files
+__pycache__/
+venv/
+.DS_Store
