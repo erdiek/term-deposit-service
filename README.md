@@ -103,7 +103,7 @@ OPTION 2: Docker
 
         c. Implementation In a modern stack, I would orchestrate this using tools like Dagster. The pipeline would handle: Data Extraction -> Training -> Evaluation -> Model Registry Update (tagging the new model as 'Production' if it wins).
 
-# Part b:
+# Part B:
     ## Additional Questions:
     1. If there is a model already in production, how do you promote the model safely?
         My goal is to never break the user experience. I would avoid "Big Bang" releases (swapping 100% at once) and use a gradual rollout strategy:
