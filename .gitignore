@@ -1,5 +1,5 @@
-# Ignore Data (Privacy)
-data/
+# Ignore Data (Privacy) but keep data folder and data dictionary
+
 *.csv
 
 # Ignore Artifacts (Generated files)
