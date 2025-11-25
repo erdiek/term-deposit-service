@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, PolynomialFeatures
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 import joblib
@@ -22,12 +23,15 @@ categorical_features = X.select_dtypes(include=['object']).columns.tolist()
 
 # --- FEATURES ---
 numeric_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='mean')),
     ('scaler', StandardScaler()),
     ('poly', PolynomialFeatures(degree=2, interaction_only=False, include_bias=False))
 ])
 
-categorical_transformer = OneHotEncoder(handle_unknown='ignore', drop='first')
-
+categorical_transformer = Pipeline(steps=[
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('encoder', OneHotEncoder(handle_unknown='ignore', drop='first'))
+])
 preprocessor = ColumnTransformer(
     transformers=[
         ('num', numeric_transformer, numeric_features),
@@ -51,7 +55,7 @@ param_dist = {
     'classifier__penalty': ['l1', 'l2'],
     
     # Class Weight: 'balanced' boosts the minority class. None treats them equally.
-    'classifier__class_weight': ['balanced', None]
+    'classifier__class_weight': ['balanced']
 }
 
 print("Starting Hyperparameter Tuning (RandomizedSearchCV)...")
