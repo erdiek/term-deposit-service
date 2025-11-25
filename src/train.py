@@ -23,7 +23,7 @@ categorical_features = X.select_dtypes(include=['object']).columns.tolist()
 # --- FEATURES ---
 numeric_transformer = Pipeline(steps=[
     ('scaler', StandardScaler()),
-    ('poly', PolynomialFeatures(degree=2, interaction_only=True, include_bias=False))
+    ('poly', PolynomialFeatures(degree=2, interaction_only=False, include_bias=False))
 ])
 
 categorical_transformer = OneHotEncoder(handle_unknown='ignore', drop='first')
@@ -35,7 +35,7 @@ preprocessor = ColumnTransformer(
     ])
 
 # 3. Build the Pipeline
-#  'liblinear' because it handles both l1 and l2 penalties well.
+#  'liblinear' handles both l1 and l2 penalties well.
 pipeline = Pipeline(steps=[
     ('preprocessor', preprocessor),
     ('classifier', LogisticRegression(solver='liblinear', random_state=42, max_iter=1000))
