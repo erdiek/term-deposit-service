@@ -54,7 +54,7 @@ def predict(data: CustomerData):
     try:
         # Step A: Convert the input JSON to a DataFrame
         # We wrap data.dict() in a list [] to make a 1-row DataFrame
-        input_df = pd.DataFrame([data.dict()])
+        input_df = pd.DataFrame([data.model_dump()])
         
         # Step B: Make the prediction
         # The pipeline handles scaling and one-hot encoding automatically!

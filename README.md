@@ -31,6 +31,7 @@ OPTION 1: Local Environment
     Run below bash code
         cd src
         python train.py
+        python app.py
     Output: Two files, model.joblib and metrics.json, will be created in the src folder.
 
     3. Run the Service Start the API server locally.
